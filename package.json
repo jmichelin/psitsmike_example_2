@@ -2,8 +2,11 @@
      "name": "mukhin_chat",
      "description": "example chat application with socket.io",
      "version": "0.0.1",
+     "scripts": {
+       "start": "nodemon app.js"
+     },
      "dependencies": {
-        "express": "",
-        "socket.io": ""
+          "express": "",
+          "socket.io": ""
      }
 }

@@ -5,10 +5,10 @@ var express = require('express')
   , io = require('socket.io').listen(server);
 
 server.listen(8080);
-
+console.log('server listening at 127.0.0.1:8080' );
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 // usernames which are currently connected to the chat
@@ -18,7 +18,7 @@ var usernames = {};
 var rooms = ['room1','room2','room3'];
 
 io.sockets.on('connection', function (socket) {
-	
+
 	// when the client emits 'adduser', this listens and executes
 	socket.on('adduser', function(username){
 		// store the username in the socket session for this client
@@ -34,6 +34,7 @@ io.sockets.on('connection', function (socket) {
 		// echo to room 1 that a person has connected to their room
 		socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
 		socket.emit('updaterooms', rooms, 'room1');
+    console.log(usernames)
 	});
 	
 	// when the client emits 'sendchat', this listens and executes
